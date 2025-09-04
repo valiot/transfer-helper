@@ -32,7 +32,7 @@ echo "[+] Upgrading existing packages (silent non-interactive)..."
 echo "[+] Installing base packages..."
 
 "${APT_GET[@]}" install \
-	ca-certificates curl gnupg lsb-release software-properties-common \
+	ca-certificates curl gnupg lsb-release software-properties-common btop \
 	zsh mosh postgresql-client ruby ruby-dev git jq pipx python3-venv python3-pip
 
 echo "[+] Installing bundler gem..."
