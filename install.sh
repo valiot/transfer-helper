@@ -30,9 +30,13 @@ echo "[+] Upgrading existing packages (silent non-interactive)..."
 "${APT_GET[@]}" upgrade
 
 echo "[+] Installing base packages..."
+
 "${APT_GET[@]}" install \
 	ca-certificates curl gnupg lsb-release software-properties-common \
-	zsh mosh postgresql-client ruby git jq pipx python3-venv python3-pip
+	zsh mosh postgresql-client ruby ruby-dev git jq pipx python3-venv python3-pip
+
+echo "[+] Installing bundler gem..."
+gem install bundler
 
 # Ensure pipx path is available (root context)
 if ! grep -q 'PIPX_BIN_DIR' /root/.zshrc 2>/dev/null || ! grep -q '.local/bin' /root/.zshrc 2>/dev/null; then
