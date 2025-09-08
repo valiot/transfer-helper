@@ -5,13 +5,13 @@ Simple one-shot provisioning script for a fresh Ubuntu 22.04 (root) environment.
 ## Quick Start (run as root)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/valiot/transfer-helper/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/valiot/transfer-helper/refs/heads/main/install.sh | bash
 ```
 
 If you are not root, prepend `sudo`:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/valiot/transfer-helper/main/install.sh | sudo bash
+curl -fsSL https://raw.githubusercontent.com/valiot/transfer-helper/refs/heads/main/install.sh | sudo bash
 ```
 
 ## What It Does
