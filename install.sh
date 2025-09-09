@@ -23,10 +23,21 @@ export DEBIAN_FRONTEND=noninteractive
 # Use an array to avoid issues with custom IFS (space removed) so each arg stays separate
 APT_GET=(apt-get -y -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold)
 
-echo "[+] Updating apt package index..."
+echo "[+] Adding PostgreSQL (PGDG) repository before first apt update..."
+PGDG_LIST=/etc/apt/sources.list.d/pgdg.list
+if [[ ! -f "$PGDG_LIST" ]]; then
+	CODENAME=$(lsb_release -cs)
+	echo "deb http://apt.postgresql.org/pub/repos/apt ${CODENAME}-pgdg main" > "$PGDG_LIST"
+	# Key install (assumes curl & gpg present on base image)
+	curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+else
+	echo "[+] PGDG repository already present; skipping add."
+fi
+
+echo "[+] Updating apt package index (includes PGDG)..."
 apt-get update -y
 
-echo "[+] Upgrading existing packages (silent non-interactive)..."
+echo "[+] Upgrading existing packages (silent non-interactive, after adding PGDG)..."
 "${APT_GET[@]}" upgrade
 
 echo "[+] Installing base packages..."
